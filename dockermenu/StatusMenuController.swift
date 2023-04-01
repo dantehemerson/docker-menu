@@ -1,11 +1,3 @@
-//
-//  StatusMenuController.swift
-//  dockermenu
-//
-//  Created by Joel Carlbark on 2016-06-17.
-//  Copyright © 2016 Joel Carlbark. All rights reserved.
-//
-
 import Cocoa
 
 class StatusMenuController: NSObject {
@@ -119,7 +111,9 @@ class StatusMenuController: NSObject {
             
             containerMenuItem.submenu = containerOptionsSubMenu
             
-            containerMenuItem.image = NSImage(named: statusImageNameByStatus[container.status] ?? NSImage.statusUnavailableName)
+            containerMenuItem.image = NSImage(named: statusImageNameByStatus[container.status] ??
+                                              NSImage.statusUnavailableName)
+            
             containerMenuItem.representedObject = container
             containerMenuItem.target = self
 

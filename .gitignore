@@ -2,6 +2,7 @@
 .DS_Store
 */.DS_Store
 *.xcuserstate
+*.xcbkptlist
 
 # Build artifacts
 build/
@@ -20,3 +21,4 @@ Carthage/Build/
 
 # Test results
 .xcresult/
+
