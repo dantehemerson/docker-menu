@@ -1,0 +1,22 @@
+# Xcode
+.DS_Store
+*/.DS_Store
+*.xcuserstate
+
+# Build artifacts
+build/
+DerivedData/
+
+# Dependency directories
+Pods/
+Carthage/Checkouts/
+Carthage/Build/
+
+# Swift Package Manager
+.build/
+
+# SwiftPM Package Builder
+.local/
+
+# Test results
+.xcresult/
