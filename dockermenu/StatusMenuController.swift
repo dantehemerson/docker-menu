@@ -18,6 +18,9 @@ class StatusMenuController: NSObject {
         addMenuItems(containers)
         
         listenForDockerEvents()
+        
+        
+       
     }
     
     
@@ -153,6 +156,16 @@ class StatusMenuController: NSObject {
     ]
     
     func addMenuItems(_ containers: [DockerContainer]) {
+        let myMenuItem = NSMenuItem(title: "Containers:", action: nil,  keyEquivalent: "")
+        
+        let attributes = [
+            NSAttributedString.Key.font: NSFont.boldSystemFont(ofSize: NSFont.systemFontSize),
+        ]
+        let attributedTitle = NSAttributedString(string: myMenuItem.title, attributes: attributes)
+        myMenuItem.attributedTitle = attributedTitle
+        statusItem.menu?.addItem(myMenuItem)
+        
+        
         containers.forEach  { (container: DockerContainer) -> () in
             self.addContainerMenuItem(container)
         }
