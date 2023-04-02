@@ -23,7 +23,22 @@ class StatusMenuController: NSObject {
     func listenForDockerEvents() {
         let task = Process()
         task.launchPath = "/usr/local/bin/docker"
-        task.arguments = ["events", "--format", "{{json .}}"]
+        task.arguments = [
+            "events",
+            "--filter", "type=container",
+            "--filter", "event=create",
+            "--filter", "event=start",
+            "--filter", "event=stop",
+//            "--filter", "event=kill",
+            "--filter", "event=pause",
+            "--filter", "event=unpause",
+            "--filter", "event=delete",
+//            "--filter", "event=destroy",
+            "--filter", "event=restart",
+//            "--filter", "event=die",
+            // 12 character id format
+            "--format", "{{if gt (len .ID) 12}}{{slice .ID 0 12}}{{else}}{{.ID}}{{end}}"
+        ]
         
         let pipe = Pipe()
         task.standardOutput = pipe
@@ -31,28 +46,21 @@ class StatusMenuController: NSObject {
         
         fileHandle.readabilityHandler = { fileHandle in
                guard let lineData = fileHandle.availableData.split(separator: UInt8(ascii: "\n")).first,
-                     let line = String(data: lineData, encoding: .utf8) else { return }
-               do {
-                   let jsonData = try JSONSerialization.jsonObject(with: Data(line.utf8), options: []) as? [String: Any]
-                   guard let action = jsonData?["Action"] as? String,
-                         let type = jsonData?["Type"] as? String else { return }
-                   
-                   switch (type, action) {
-                       case ("container", "start"),
-                            ("container", "pause"),
-                            ("container", "unpause"),
-                            ("container", "stop"),
-                            ("container", "kill"),
-                            ("container", "die"),
-                            ("container", "destroy"):
-                                debugPrint("Containers status updated, updading UI")
-                                self.reloadAndShowItems()
-                       default:
-                           break
-                   }
-               } catch {
-                   print("Error parsing JSON data from docker events: \(error)")
-               }
+                     let containerId = String(data: lineData, encoding: .utf8) else { return }
+              
+                if (!containerId.isEmpty) {
+                    debugPrint("Container status updated. ContainerID: \(containerId)")
+
+                    do {
+                        let container = try self.dockerApi.getContainerById(containerId)
+                        
+                        self.updateContainerMenuItem(container)
+                    } catch DockerError.containerNotFound {
+                        debugPrint("Error updating container menu item. Container \(containerId) not found")
+                    } catch {
+                        debugPrint("Error updating container menu item")
+                    }
+                }
            }
         
         task.launch()
@@ -62,15 +70,41 @@ class StatusMenuController: NSObject {
         NSApplication.shared.terminate(self)
     }
     
-    @objc func reloadAndShowItems() {
-        let containers = dockerApi.getContainers()
-        removeAllImageItems()
-        addMenuItems(containers)
+    func updateContainerMenuItem(_ container: DockerContainer) {
+        debugPrint("Updating container menu item", container)
+         
+        let menuItem = statusItem.menu!.items.first { item in
+            if let dockerContainer = item.representedObject as? DockerContainer {
+                return dockerContainer.id == container.id
+            } else {
+                return false
+            }
+        }
+
+        if (menuItem != nil) {
+            menuItem!.title =  "(\(container.status)) \(container.name)"
+            menuItem!.image = NSImage(named: statusImageNameByStatus[container.status] ??
+                                NSImage.statusUnavailableName)
+
+            // Load submenu options that matches new container status
+            if((menuItem!.submenu) != nil) {
+                menuItem!.submenu!.removeAllItems()
+                addContainerSubMenuOptions(container, menuItem!.submenu!)
+            }
+        }
     }
     
     @IBAction func stopAllClicked(_ sender: NSMenuItem) {
         DispatchQueue.global(qos: .userInitiated).async {
             self.dockerApi.stopAllContainers()
+        }
+    }
+
+    @IBAction func runAction(_ sender: NSMenuItem) {
+        DispatchQueue.global(qos: .userInitiated).async {
+            if let (action, container) = sender.representedObject as? (DockerAction, DockerContainer) {
+                self.dockerApi.runAction(action: action, containerName: container.name)
+            }
         }
     }
     
@@ -84,15 +118,6 @@ class StatusMenuController: NSObject {
                 statusItem.menu?.removeItem(item)
             }
         }
-    }
-    
-    @IBAction func runAction(_ sender: NSMenuItem) {
-        DispatchQueue.global(qos: .userInitiated).async {
-            if let (action, container) = sender.representedObject as? (DockerAction, DockerContainer) {
-                        self.dockerApi.runAction(action: action, containerName: container.name)
-                    }
-                  
-                }
     }
   
     let statusImageNameByStatus: [DockerContainer.Status: String] = [
@@ -123,8 +148,8 @@ class StatusMenuController: NSObject {
         }
     }
     
+    
     func addContainerSubMenuOptions(_ container: DockerContainer, _ parentMenu: NSMenu) {
-        
         switch(container.status) {
             case .running:
                 

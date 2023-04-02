@@ -15,3 +15,7 @@ enum DockerAction {
     case openShell // Open the Terminal and show the interactive shell(bash or sh).
     case remove // Deletes the container
 }
+
+enum DockerError: Error {
+    case containerNotFound
+}

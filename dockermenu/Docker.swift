@@ -23,9 +23,7 @@ class Docker {
             .filter { !$0.isEmpty }
             .map { line -> DockerContainer? in
                 let values = line.split(separator: ",")
-                let id = String(values[0])
-                let name = String(values[1])
-                let state = String(values[2])
+                let (id, name, state) = (String(values[0]), String(values[1]), String(values[2]))
                 
                 let status =  self.getContainerStatusFromState(from: state)
                 
@@ -38,6 +36,35 @@ class Docker {
             }.compactMap { $0 }
                 
         return containers
+    }
+    
+    func getContainerById(_ containerId: String) throws -> DockerContainer {
+        let task = Process()
+        let pipe = Pipe()
+        
+        task.launchPath = dockerPath
+        task.arguments = ["ps", "-a", "--filter", "id=\(containerId)" , "--format", "{{.ID}},{{.Names}},{{.State}}"]
+        task.standardOutput = pipe
+        task.launch()
+        
+        let handle = pipe.fileHandleForReading
+        let data = handle.readDataToEndOfFile()
+        
+        let rawOutput = NSString(data: data, encoding: String.Encoding.utf8.rawValue)
+        
+        let lineRawOuput = (rawOutput! as String).trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        let values = lineRawOuput.split(separator: ",")
+        let (id, name, state) = (String(values[0]), String(values[1]), String(values[2]))
+
+        let status =  self.getContainerStatusFromState(from: state)
+
+        // Skip unsupported containers
+        if (status == nil) {
+            throw DockerError.containerNotFound
+        }
+
+        return DockerContainer(id: id,name: name, status: status!)
     }
     
     func getContainerStatusFromState(from containerState: String) -> DockerContainer.Status? {
@@ -56,6 +83,7 @@ class Docker {
 
     func stopAllContainers() {
         debugPrint("Stopping all containers")
+
         let containers = self.getContainers()
         containers.forEach  { (container: DockerContainer) -> () in
             runAction(action: DockerAction.stop, containerName: container.name)
