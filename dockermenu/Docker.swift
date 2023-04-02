@@ -32,7 +32,7 @@ class Docker {
                     return nil
                 }
                                     
-                return DockerContainer(id: id,name: name, status: status!)
+                return DockerContainer(id: id,name: name, status: status!, state: state)
             }.compactMap { $0 }
                 
         return containers
@@ -55,8 +55,12 @@ class Docker {
         let lineRawOuput = (rawOutput! as String).trimmingCharacters(in: .whitespacesAndNewlines)
         
         let values = lineRawOuput.split(separator: ",")
+        
+        if(values.count < 3) {
+            throw DockerError.containerNotFound
+        }
+        
         let (id, name, state) = (String(values[0]), String(values[1]), String(values[2]))
-
         let status =  self.getContainerStatusFromState(from: state)
 
         // Skip unsupported containers
@@ -64,7 +68,7 @@ class Docker {
             throw DockerError.containerNotFound
         }
 
-        return DockerContainer(id: id,name: name, status: status!)
+        return DockerContainer(id: id,name: name, status: status!, state: state)
     }
     
     func getContainerStatusFromState(from containerState: String) -> DockerContainer.Status? {
@@ -75,6 +79,8 @@ class Docker {
                 return .paused
             case "created", "exited":
                 return .stopped
+            case "destroy", "kill", "dead", "removing":
+                return .unknown
             // Ignore containers with status (dead, removing).
             default:
                 return nil

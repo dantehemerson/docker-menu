@@ -20,6 +20,12 @@ class StatusMenuController: NSObject {
         listenForDockerEvents()
     }
     
+    
+    @objc func menuDidClose() {
+           // Handle menu close event here
+    }
+    
+    
     func listenForDockerEvents() {
         let task = Process()
         task.launchPath = "/usr/local/bin/docker"
@@ -29,13 +35,13 @@ class StatusMenuController: NSObject {
             "--filter", "event=create",
             "--filter", "event=start",
             "--filter", "event=stop",
-//            "--filter", "event=kill",
+            "--filter", "event=kill",
             "--filter", "event=pause",
             "--filter", "event=unpause",
             "--filter", "event=delete",
-//            "--filter", "event=destroy",
+            "--filter", "event=destroy",
             "--filter", "event=restart",
-//            "--filter", "event=die",
+            "--filter", "event=die",
             // 12 character id format
             "--format", "{{if gt (len .ID) 12}}{{slice .ID 0 12}}{{else}}{{.ID}}{{end}}"
         ]
@@ -56,6 +62,7 @@ class StatusMenuController: NSObject {
                         
                         self.updateContainerMenuItem(container)
                     } catch DockerError.containerNotFound {
+                        self.remoteContainerNotFoundMenuItem(containerId)
                         debugPrint("Error updating container menu item. Container \(containerId) not found")
                     } catch {
                         debugPrint("Error updating container menu item")
@@ -73,25 +80,44 @@ class StatusMenuController: NSObject {
     func updateContainerMenuItem(_ container: DockerContainer) {
         debugPrint("Updating container menu item", container)
          
+        let menuItem = self.getMenuItemByContainerId(container.id)
+
+        if (menuItem != nil) {
+            menuItem?.title = container.getTitle()
+            menuItem?.image = NSImage(named: statusImageNameByStatus[container.status] ??
+                                    NSImage.statusUnavailableName)
+            
+
+            // Load submenu options that matches new container status
+            if((menuItem?.submenu) != nil) {
+                menuItem?.submenu?.removeAllItems()
+                addContainerSubMenuOptions(container, menuItem!.submenu!)
+            }
+        } else {
+            self.addContainerMenuItem(container)
+        }
+    }
+    
+    func remoteContainerNotFoundMenuItem(_ containerId: String) {
+        debugPrint("Marking menuObject to be removed")
+        
+        let menuItem = getMenuItemByContainerId(containerId)
+        
+        if(menuItem != nil) {
+            statusItem.menu?.removeItem(menuItem!)
+        }
+    }
+    
+    func getMenuItemByContainerId(_ containerId: String) -> NSMenuItem? {
         let menuItem = statusItem.menu!.items.first { item in
             if let dockerContainer = item.representedObject as? DockerContainer {
-                return dockerContainer.id == container.id
+                return dockerContainer.id == containerId
             } else {
                 return false
             }
         }
-
-        if (menuItem != nil) {
-            menuItem!.title =  "(\(container.status)) \(container.name)"
-            menuItem!.image = NSImage(named: statusImageNameByStatus[container.status] ??
-                                NSImage.statusUnavailableName)
-
-            // Load submenu options that matches new container status
-            if((menuItem!.submenu) != nil) {
-                menuItem!.submenu!.removeAllItems()
-                addContainerSubMenuOptions(container, menuItem!.submenu!)
-            }
-        }
+        
+        return menuItem
     }
     
     @IBAction func stopAllClicked(_ sender: NSMenuItem) {
@@ -128,26 +154,30 @@ class StatusMenuController: NSObject {
     
     func addMenuItems(_ containers: [DockerContainer]) {
         containers.forEach  { (container: DockerContainer) -> () in
-            let containerMenuItem : NSMenuItem = NSMenuItem(title: "(\(container.status)) \(container.name)", action: nil, keyEquivalent: "")
-            debugPrint("Adding menu item", containerMenuItem)
-                
-            let containerOptionsSubMenu = NSMenu()
-            
-            addContainerSubMenuOptions(container, containerOptionsSubMenu)
-    
-            
-            containerMenuItem.submenu = containerOptionsSubMenu
-            
-            containerMenuItem.image = NSImage(named: statusImageNameByStatus[container.status] ??
-                                              NSImage.statusUnavailableName)
-            
-            containerMenuItem.representedObject = container
-            containerMenuItem.target = self
-
-            statusItem.menu!.addItem(containerMenuItem)
+            self.addContainerMenuItem(container)
         }
     }
     
+    func addContainerMenuItem(_ container: DockerContainer) {
+        let containerMenuItem : NSMenuItem = NSMenuItem(title: container.getTitle(), action: nil, keyEquivalent: "")
+    
+        debugPrint("Adding menu item", containerMenuItem)
+            
+        let containerOptionsSubMenu = NSMenu()
+        
+        addContainerSubMenuOptions(container, containerOptionsSubMenu)
+
+        
+        containerMenuItem.submenu = containerOptionsSubMenu
+        
+        containerMenuItem.image = NSImage(named: statusImageNameByStatus[container.status] ??
+                                          NSImage.statusUnavailableName)
+        
+        containerMenuItem.representedObject = container
+        containerMenuItem.target = self
+
+        statusItem.menu!.addItem(containerMenuItem)
+    }
     
     func addContainerSubMenuOptions(_ container: DockerContainer, _ parentMenu: NSMenu) {
         switch(container.status) {
@@ -223,6 +253,8 @@ class StatusMenuController: NSObject {
                 parentMenu.addItem(removeMenuItem)
                 
                 break
+            default:
+                break;
         }
     }
 }
