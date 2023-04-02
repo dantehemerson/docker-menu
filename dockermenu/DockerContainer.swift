@@ -5,7 +5,7 @@ struct DockerContainer {
     var status: Status
 
     enum Status {
-        case up
+        case running
         case paused
         case stopped
     }
