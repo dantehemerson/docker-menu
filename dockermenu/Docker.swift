@@ -9,7 +9,7 @@ class Docker {
         let pipe = Pipe()
         
         task.launchPath = dockerPath
-        task.arguments = ["ps", "-a", "--format", "{{.Names}},{{.State}}"]
+        task.arguments = ["ps", "-a", "--format", "{{.ID}},{{.Names}},{{.State}}"]
         task.standardOutput = pipe
         task.launch()
         
@@ -23,8 +23,9 @@ class Docker {
             .filter { !$0.isEmpty }
             .map { line -> DockerContainer? in
                 let values = line.split(separator: ",")
-                let name = String(values[0])
-                let state = String(values[1])
+                let id = String(values[0])
+                let name = String(values[1])
+                let state = String(values[2])
                 
                 let status =  self.getContainerStatusFromState(from: state)
                 
@@ -33,7 +34,7 @@ class Docker {
                     return nil
                 }
                                     
-                return DockerContainer(name: name, status: status!)
+                return DockerContainer(id: id,name: name, status: status!)
             }.compactMap { $0 }
                 
         return containers

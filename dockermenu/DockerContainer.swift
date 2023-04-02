@@ -1,8 +1,9 @@
 import Foundation
 
 struct DockerContainer {
-    var name: String
-    var status: Status
+    let id: String
+    let name: String
+    let status: Status
 
     enum Status {
         case running

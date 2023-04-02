@@ -126,81 +126,78 @@ class StatusMenuController: NSObject {
     func addContainerSubMenuOptions(_ container: DockerContainer, _ parentMenu: NSMenu) {
         
         switch(container.status) {
-        case .running:
-            
-            let openShellMenuItem = NSMenuItem(title: "Open Shell", action: #selector(StatusMenuController.runAction(_:)), keyEquivalent: "")
-            openShellMenuItem.image = NSImage(named: NSImage.rightFacingTriangleTemplateName)
-            openShellMenuItem.isEnabled = true
-            openShellMenuItem.representedObject = (DockerAction.openShell, container)
-            openShellMenuItem.target = self
-            
-            let restartMenuItem = NSMenuItem(title: "Restart", action: #selector(StatusMenuController.runAction(_:)), keyEquivalent: "")
-            restartMenuItem.image = NSImage(named: NSImage.refreshTemplateName)
-            restartMenuItem.isEnabled = true
-            restartMenuItem.representedObject = (DockerAction.restart, container)
-            restartMenuItem.target = self
+            case .running:
+                
+                let openShellMenuItem = NSMenuItem(title: "Open Shell", action: #selector(StatusMenuController.runAction(_:)), keyEquivalent: "")
+                openShellMenuItem.image = NSImage(named: NSImage.rightFacingTriangleTemplateName)
+                openShellMenuItem.isEnabled = true
+                openShellMenuItem.representedObject = (DockerAction.openShell, container)
+                openShellMenuItem.target = self
+                
+                let restartMenuItem = NSMenuItem(title: "Restart", action: #selector(StatusMenuController.runAction(_:)), keyEquivalent: "")
+                restartMenuItem.image = NSImage(named: NSImage.refreshTemplateName)
+                restartMenuItem.isEnabled = true
+                restartMenuItem.representedObject = (DockerAction.restart, container)
+                restartMenuItem.target = self
 
-            let pauseMenuItem = NSMenuItem(title: "Pause", action: #selector(StatusMenuController.runAction(_:)), keyEquivalent: "")
-            pauseMenuItem.image = NSImage(named: NSImage.touchBarPauseTemplateName)
-            pauseMenuItem.isEnabled = true
-            pauseMenuItem.representedObject = (DockerAction.pause, container)
-            pauseMenuItem.target = self
-            
-            let stopMenuItem = NSMenuItem(title: "Stop", action: #selector(StatusMenuController.runAction(_:)), keyEquivalent: "")
-            stopMenuItem.image = NSImage(named: NSImage.touchBarRecordStopTemplateName)
-            stopMenuItem.isEnabled = true
-            stopMenuItem.representedObject = (DockerAction.stop, container)
-            stopMenuItem.target = self
-            
-            let logsMenuItem = NSMenuItem(title: "Logs", action: #selector(StatusMenuController.runAction(_:)), keyEquivalent: "")
-            logsMenuItem.image = NSImage(named: NSImage.touchBarTextLeftAlignTemplateName)
-            logsMenuItem.isEnabled = true
-            logsMenuItem.representedObject = (DockerAction.logs, container)
-            logsMenuItem.target = self
-            
+                let pauseMenuItem = NSMenuItem(title: "Pause", action: #selector(StatusMenuController.runAction(_:)), keyEquivalent: "")
+                pauseMenuItem.image = NSImage(named: NSImage.touchBarPauseTemplateName)
+                pauseMenuItem.isEnabled = true
+                pauseMenuItem.representedObject = (DockerAction.pause, container)
+                pauseMenuItem.target = self
+                
+                let stopMenuItem = NSMenuItem(title: "Stop", action: #selector(StatusMenuController.runAction(_:)), keyEquivalent: "")
+                stopMenuItem.image = NSImage(named: NSImage.touchBarRecordStopTemplateName)
+                stopMenuItem.isEnabled = true
+                stopMenuItem.representedObject = (DockerAction.stop, container)
+                stopMenuItem.target = self
+                
+                let logsMenuItem = NSMenuItem(title: "Logs", action: #selector(StatusMenuController.runAction(_:)), keyEquivalent: "")
+                logsMenuItem.image = NSImage(named: NSImage.touchBarTextLeftAlignTemplateName)
+                logsMenuItem.isEnabled = true
+                logsMenuItem.representedObject = (DockerAction.logs, container)
+                logsMenuItem.target = self
+                
 
-            parentMenu.addItem(openShellMenuItem)
-            parentMenu.addItem(restartMenuItem)
-            parentMenu.addItem(pauseMenuItem)
-            parentMenu.addItem(stopMenuItem)
-            parentMenu.addItem(logsMenuItem)
-            
-            
-            break
-            
-        case .paused:
-            let unPauseMenuItem = NSMenuItem(title: "UnPause", action: #selector(StatusMenuController.runAction(_:)), keyEquivalent: "")
-            unPauseMenuItem.image = NSImage(named: NSImage.touchBarPlayTemplateName)
-            unPauseMenuItem.isEnabled = true
-            unPauseMenuItem.representedObject = (DockerAction.unpause, container)
-            unPauseMenuItem.target = self
-            
+                parentMenu.addItem(openShellMenuItem)
+                parentMenu.addItem(restartMenuItem)
+                parentMenu.addItem(pauseMenuItem)
+                parentMenu.addItem(stopMenuItem)
+                parentMenu.addItem(logsMenuItem)
+                
+                
+                break
+                
+            case .paused:
+                let unPauseMenuItem = NSMenuItem(title: "UnPause", action: #selector(StatusMenuController.runAction(_:)), keyEquivalent: "")
+                unPauseMenuItem.image = NSImage(named: NSImage.touchBarPlayTemplateName)
+                unPauseMenuItem.isEnabled = true
+                unPauseMenuItem.representedObject = (DockerAction.unpause, container)
+                unPauseMenuItem.target = self
+                
 
-            parentMenu.addItem(unPauseMenuItem)
+                parentMenu.addItem(unPauseMenuItem)
+                
+                break
             
-            break
-        
-        case .stopped:
-            let startMenuItem = NSMenuItem(title: "Start", action: #selector(StatusMenuController.runAction(_:)), keyEquivalent: "")
-            startMenuItem.image = NSImage(named: NSImage.touchBarPlayTemplateName)
-            startMenuItem.isEnabled = true
-            startMenuItem.representedObject = (DockerAction.start, container)
-            startMenuItem.target = self
-            
-            let removeMenuItem = NSMenuItem(title: "Remove", action: #selector(StatusMenuController.runAction(_:)), keyEquivalent: "")
-            removeMenuItem.image = NSImage(named: NSImage.touchBarDeleteTemplateName)
-            removeMenuItem.isEnabled = true
-            removeMenuItem.representedObject = (DockerAction.remove, container)
-            removeMenuItem.target = self
-            
+            case .stopped:
+                let startMenuItem = NSMenuItem(title: "Start", action: #selector(StatusMenuController.runAction(_:)), keyEquivalent: "")
+                startMenuItem.image = NSImage(named: NSImage.touchBarPlayTemplateName)
+                startMenuItem.isEnabled = true
+                startMenuItem.representedObject = (DockerAction.start, container)
+                startMenuItem.target = self
+                
+                let removeMenuItem = NSMenuItem(title: "Remove", action: #selector(StatusMenuController.runAction(_:)), keyEquivalent: "")
+                removeMenuItem.image = NSImage(named: NSImage.touchBarDeleteTemplateName)
+                removeMenuItem.isEnabled = true
+                removeMenuItem.representedObject = (DockerAction.remove, container)
+                removeMenuItem.target = self
+                
 
-            parentMenu.addItem(startMenuItem)
-            parentMenu.addItem(removeMenuItem)
-            
-            
-            break
-            
-            
+                parentMenu.addItem(startMenuItem)
+                parentMenu.addItem(removeMenuItem)
+                
+                break
         }
     }
 }
