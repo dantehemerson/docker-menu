@@ -31,7 +31,7 @@ class StatusMenuController: NSObject {
     
     func listenForDockerEvents() {
         let task = Process()
-        task.launchPath = "/usr/local/bin/docker"
+        task.launchPath = self.dockerApi.getDockerPath()
         task.arguments = [
             "events",
             "--filter", "type=container",

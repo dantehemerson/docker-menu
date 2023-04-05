@@ -1,7 +1,11 @@
 import Foundation
 
 class Docker {
-    let dockerPath = "/usr/local/bin/docker"
+    private let dockerPath = "/opt/homebrew/bin/docker" // "/usr/local/bin/docker"
+    
+    func getDockerPath() -> String {
+        return dockerPath
+    }
     
     
     func getContainers() -> [DockerContainer] {
@@ -11,7 +15,7 @@ class Docker {
         task.launchPath = dockerPath
         task.arguments = ["ps", "-a", "--format", "{{.ID}},{{.Names}},{{.State}}"]
         task.standardOutput = pipe
-        task.launch()
+            task.launch()
         
         let handle = pipe.fileHandleForReading
         let data = handle.readDataToEndOfFile()
