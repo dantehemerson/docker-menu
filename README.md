@@ -18,7 +18,7 @@ Here are some screenshots:
 ## Installation
 
 You can either build it yourself (see details further down). Or download
-the zip archive from [releases](/releases) and run `dockermenu.app`.
+the zip archive from [releases](https://github.com/dantehemerson/docker-menu/releases) and run `dockermenu.app`.
 
 ## Build and run
 
