@@ -1,9 +1,20 @@
 import Foundation
 
 class Docker {
-    private let dockerPath = "/opt/homebrew/bin/docker" // "/usr/local/bin/docker"
-    
-    func getDockerPath() -> String {
+    private var dockerPath: String = {
+        let pathsToCheck = ["/opt/homebrew/bin/docker", "/usr/local/bin/docker"]
+            
+        for path in pathsToCheck {
+                let fileManager = FileManager.default
+                if fileManager.fileExists(atPath: path) {
+                    return path
+                }
+            }
+        
+        return ""
+    }()
+
+    func getDockerPath() -> String? {
         return dockerPath
     }
     
