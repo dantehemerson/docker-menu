@@ -1,13 +1,19 @@
-# Dockermenu
+# 🐬 Docker Menu
 
-A small application for your MacOS menu bar that lists all running docker containers.
+Manage your Docker containers with convenience from your macOS menu bar. 
 
-**Screenshots**:
+Here are some screenshots:
 
 <p align="center">
   <img src=".github/screenshots/screenshot1.png" alt="Your Image Alt Text" width="340px">
   <img src=".github/screenshots/screenshot2.png" alt="Your Image Alt Text" width="340px">
 </p>
+
+## Features
+
+* Start, pause, stop, restart and remove containers.
+* Open interactive shell.
+* See container logs.
 
 ## Installation
 
@@ -22,3 +28,7 @@ the zip archive from [releases](/releases) and run `dockermenu.app`.
 4. Chose "Export as a Mac Application"
 
 This should generate a `dockermenu.app` ready to be run.
+
+## Author
+
+* [Dante Calderon](https://github.com/dantehemerson)
