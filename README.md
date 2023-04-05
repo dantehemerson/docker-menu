@@ -5,9 +5,9 @@ A small application for your MacOS menu bar that lists all running docker contai
 **Screenshots**:
 
 <p align="center">
-  <img src=".github/screenshots/screenshot1.png" alt="Your Image Alt Text" style="max-width: 500px;border-right: 2px solid gray;">
-  <img src=".github/screenshots/screenshot2.png" alt="Your Image Alt Text" style="max-width: 500px;">
-</p>
+  <img src=".github/screenshots/screenshot1.png" alt="Your Image Alt Text" width="340px">
+  <img src=".github/screenshots/screenshot2.png" alt="Your Image Alt Text" width="340px">
+</p3
 
 ## Installation
 
