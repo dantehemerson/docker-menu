@@ -7,7 +7,7 @@ A small application for your MacOS menu bar that lists all running docker contai
 <p align="center">
   <img src=".github/screenshots/screenshot1.png" alt="Your Image Alt Text" width="340px">
   <img src=".github/screenshots/screenshot2.png" alt="Your Image Alt Text" width="340px">
-</p3
+</p>
 
 ## Installation
 
