@@ -2,8 +2,8 @@
 .DS_Store
 */.DS_Store
 *.xcuserstate
+xcuserdata
 *.xcbkptlist
-*.pbxproj
 
 # Build artifacts
 build/
