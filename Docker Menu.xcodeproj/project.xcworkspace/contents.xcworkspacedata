@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:dockermenu.xcodeproj">
+      location = "self:/Users/d/coding/repos/docker-menu/Docker Menu.xcodeproj">
    </FileRef>
 </Workspace>

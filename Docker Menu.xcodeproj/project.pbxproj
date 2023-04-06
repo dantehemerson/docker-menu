@@ -36,15 +36,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		23F4D4491D13E64A001FAF0F /* dockermenu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = dockermenu.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		23F4D4491D13E64A001FAF0F /* Docker Menu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Docker Menu.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		23F4D44C1D13E64A001FAF0F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		23F4D44E1D13E64A001FAF0F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		23F4D4511D13E64A001FAF0F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		23F4D4531D13E64A001FAF0F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		23F4D4581D13E64A001FAF0F /* dockermenuTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = dockermenuTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		23F4D4581D13E64A001FAF0F /* Docker MenuTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Docker MenuTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		23F4D45C1D13E64A001FAF0F /* dockermenuTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dockermenuTests.swift; sourceTree = "<group>"; };
 		23F4D45E1D13E64A001FAF0F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		23F4D4631D13E64A001FAF0F /* dockermenuUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = dockermenuUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		23F4D4631D13E64A001FAF0F /* Docker MenuUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Docker MenuUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		23F4D4671D13E64A001FAF0F /* dockermenuUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dockermenuUITests.swift; sourceTree = "<group>"; };
 		23F4D4691D13E64A001FAF0F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		23F4E9B51D143405004DA3CC /* StatusMenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusMenuController.swift; sourceTree = "<group>"; };
@@ -91,9 +91,9 @@
 		23F4D44A1D13E64A001FAF0F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				23F4D4491D13E64A001FAF0F /* dockermenu.app */,
-				23F4D4581D13E64A001FAF0F /* dockermenuTests.xctest */,
-				23F4D4631D13E64A001FAF0F /* dockermenuUITests.xctest */,
+				23F4D4491D13E64A001FAF0F /* Docker Menu.app */,
+				23F4D4581D13E64A001FAF0F /* Docker MenuTests.xctest */,
+				23F4D4631D13E64A001FAF0F /* Docker MenuUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -134,9 +134,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		23F4D4481D13E64A001FAF0F /* dockermenu */ = {
+		23F4D4481D13E64A001FAF0F /* Docker Menu */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 23F4D46C1D13E64A001FAF0F /* Build configuration list for PBXNativeTarget "dockermenu" */;
+			buildConfigurationList = 23F4D46C1D13E64A001FAF0F /* Build configuration list for PBXNativeTarget "Docker Menu" */;
 			buildPhases = (
 				23F4D4451D13E64A001FAF0F /* Sources */,
 				23F4D4461D13E64A001FAF0F /* Frameworks */,
@@ -146,14 +146,14 @@
 			);
 			dependencies = (
 			);
-			name = dockermenu;
+			name = "Docker Menu";
 			productName = dockermenu;
-			productReference = 23F4D4491D13E64A001FAF0F /* dockermenu.app */;
+			productReference = 23F4D4491D13E64A001FAF0F /* Docker Menu.app */;
 			productType = "com.apple.product-type.application";
 		};
-		23F4D4571D13E64A001FAF0F /* dockermenuTests */ = {
+		23F4D4571D13E64A001FAF0F /* Docker MenuTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 23F4D46F1D13E64A001FAF0F /* Build configuration list for PBXNativeTarget "dockermenuTests" */;
+			buildConfigurationList = 23F4D46F1D13E64A001FAF0F /* Build configuration list for PBXNativeTarget "Docker MenuTests" */;
 			buildPhases = (
 				23F4D4541D13E64A001FAF0F /* Sources */,
 				23F4D4551D13E64A001FAF0F /* Frameworks */,
@@ -164,14 +164,14 @@
 			dependencies = (
 				23F4D45A1D13E64A001FAF0F /* PBXTargetDependency */,
 			);
-			name = dockermenuTests;
+			name = "Docker MenuTests";
 			productName = dockermenuTests;
-			productReference = 23F4D4581D13E64A001FAF0F /* dockermenuTests.xctest */;
+			productReference = 23F4D4581D13E64A001FAF0F /* Docker MenuTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		23F4D4621D13E64A001FAF0F /* dockermenuUITests */ = {
+		23F4D4621D13E64A001FAF0F /* Docker MenuUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 23F4D4721D13E64A001FAF0F /* Build configuration list for PBXNativeTarget "dockermenuUITests" */;
+			buildConfigurationList = 23F4D4721D13E64A001FAF0F /* Build configuration list for PBXNativeTarget "Docker MenuUITests" */;
 			buildPhases = (
 				23F4D45F1D13E64A001FAF0F /* Sources */,
 				23F4D4601D13E64A001FAF0F /* Frameworks */,
@@ -182,9 +182,9 @@
 			dependencies = (
 				23F4D4651D13E64A001FAF0F /* PBXTargetDependency */,
 			);
-			name = dockermenuUITests;
+			name = "Docker MenuUITests";
 			productName = dockermenuUITests;
-			productReference = 23F4D4631D13E64A001FAF0F /* dockermenuUITests.xctest */;
+			productReference = 23F4D4631D13E64A001FAF0F /* Docker MenuUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -195,7 +195,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
 				LastUpgradeCheck = 1130;
-				ORGANIZATIONNAME = "Joel Carlbark";
+				ORGANIZATIONNAME = "Dante Calderon";
 				TargetAttributes = {
 					23F4D4481D13E64A001FAF0F = {
 						CreatedOnToolsVersion = 7.2.1;
@@ -213,7 +213,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 23F4D4441D13E64A001FAF0F /* Build configuration list for PBXProject "dockermenu" */;
+			buildConfigurationList = 23F4D4441D13E64A001FAF0F /* Build configuration list for PBXProject "Docker Menu" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -226,9 +226,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				23F4D4481D13E64A001FAF0F /* dockermenu */,
-				23F4D4571D13E64A001FAF0F /* dockermenuTests */,
-				23F4D4621D13E64A001FAF0F /* dockermenuUITests */,
+				23F4D4481D13E64A001FAF0F /* Docker Menu */,
+				23F4D4571D13E64A001FAF0F /* Docker MenuTests */,
+				23F4D4621D13E64A001FAF0F /* Docker MenuUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -293,12 +293,12 @@
 /* Begin PBXTargetDependency section */
 		23F4D45A1D13E64A001FAF0F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 23F4D4481D13E64A001FAF0F /* dockermenu */;
+			target = 23F4D4481D13E64A001FAF0F /* Docker Menu */;
 			targetProxy = 23F4D4591D13E64A001FAF0F /* PBXContainerItemProxy */;
 		};
 		23F4D4651D13E64A001FAF0F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 23F4D4481D13E64A001FAF0F /* dockermenu */;
+			target = 23F4D4481D13E64A001FAF0F /* Docker Menu */;
 			targetProxy = 23F4D4641D13E64A001FAF0F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -426,7 +426,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = dockermenu/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = vorce.dockermenu;
+				PRODUCT_BUNDLE_IDENTIFIER = dantehemerson.dockermenu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
@@ -440,7 +440,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = dockermenu/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = vorce.dockermenu;
+				PRODUCT_BUNDLE_IDENTIFIER = dantehemerson.dockermenu;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 			};
@@ -456,7 +456,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = vorce.dockermenuTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/dockermenu.app/Contents/MacOS/dockermenu";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Docker Menu.app/Contents/MacOS/Docker Menu";
 			};
 			name = Debug;
 		};
@@ -470,7 +470,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = vorce.dockermenuTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/dockermenu.app/Contents/MacOS/dockermenu";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Docker Menu.app/Contents/MacOS/Docker Menu";
 			};
 			name = Release;
 		};
@@ -505,7 +505,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		23F4D4441D13E64A001FAF0F /* Build configuration list for PBXProject "dockermenu" */ = {
+		23F4D4441D13E64A001FAF0F /* Build configuration list for PBXProject "Docker Menu" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				23F4D46A1D13E64A001FAF0F /* Debug */,
@@ -514,7 +514,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		23F4D46C1D13E64A001FAF0F /* Build configuration list for PBXNativeTarget "dockermenu" */ = {
+		23F4D46C1D13E64A001FAF0F /* Build configuration list for PBXNativeTarget "Docker Menu" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				23F4D46D1D13E64A001FAF0F /* Debug */,
@@ -523,7 +523,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		23F4D46F1D13E64A001FAF0F /* Build configuration list for PBXNativeTarget "dockermenuTests" */ = {
+		23F4D46F1D13E64A001FAF0F /* Build configuration list for PBXNativeTarget "Docker MenuTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				23F4D4701D13E64A001FAF0F /* Debug */,
@@ -532,7 +532,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		23F4D4721D13E64A001FAF0F /* Build configuration list for PBXNativeTarget "dockermenuUITests" */ = {
+		23F4D4721D13E64A001FAF0F /* Build configuration list for PBXNativeTarget "Docker MenuUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				23F4D4731D13E64A001FAF0F /* Debug */,
